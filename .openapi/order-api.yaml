@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Order API
+  version: 1.0.0
+servers:
+  - url: /api
+tags:
+  - name: Orders
+    description: Everything about orders
+paths:
+  /orders:
+    post:
+      summary: Create an order
+      tags:
+        - Orders
+      operationId: PostOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        200:
+          description: Created order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    get:
+      summary: Get all orders
+      tags: 
+        - Orders
+      operationId: GetOrders
+      responses:
+        200:
+          description: Orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  /orders/{orderId}:
+    get:
+      summary: Get an order by id
+      tags:
+        - Orders
+      operationId: GetOrderById
+      parameters:
+        - name: orderId
+          in: path
+          description: Id of the order to get
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    put:
+      summary: Update an order by id
+      tags: 
+        - Orders
+      operationId: UpdateOrderById
+      parameters:
+        - name: orderId
+          in: path
+          description: Id of the order to update
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Updated order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+        - id
+        - name
+        - address
+        - email
+        - productId
+        - quantity
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+          format: email
+        productId:
+          type: integer
+        quantity:
+          type: integer

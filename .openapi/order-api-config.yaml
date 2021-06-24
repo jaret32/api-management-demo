@@ -1,0 +1,7 @@
+additionalProperties:
+  aspnetCoreVersion: 5.0
+  buildTarget: library
+  nullableReferenceTypes: true
+  operationResultTask: true
+  packageName: OrderService.Contracts
+  useSwashbuckle: false
