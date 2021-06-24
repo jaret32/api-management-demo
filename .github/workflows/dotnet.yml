@@ -30,3 +30,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Diff OpenAPI Specifications
         uses: docker://openapitools/openapi-diff:latest
+        with:
+          args: /github/workspace/.openapi/apis/order-api.yaml /github/workspace/.openapi/apis/order-api.yaml
+          
