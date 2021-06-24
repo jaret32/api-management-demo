@@ -25,7 +25,8 @@ jobs:
   
   diff:
     runs-on: ubuntu-latest
-    container: openapitools/openapi-diff
+    container:
+      image: openapitools/openapi-diff
     
     steps:
       - uses: actions/checkout@v2
