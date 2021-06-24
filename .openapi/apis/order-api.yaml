@@ -99,6 +99,7 @@ components:
         - email
         - productId
         - quantity
+        - date
       properties:
         id:
           type: string
@@ -115,3 +116,7 @@ components:
           type: integer
         quantity:
           type: integer
+        date:
+          type: string
+          format: date-time
+          readOnly: true
