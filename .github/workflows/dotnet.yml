@@ -25,10 +25,8 @@ jobs:
   
   diff:
     runs-on: ubuntu-latest
-    container:
-      image: openapitools/openapi-diff
     
     steps:
       - uses: actions/checkout@v2
       - name: Diff OpenAPI Specifications
-        run: openapi-diff /github/workspace/.openapi/apis/order-api.yaml /github/workspace/.openapi/apis/order-api.yaml --fail-on-incompatible --state
+        uses: docker://openapitools/openapi-diff:latest
