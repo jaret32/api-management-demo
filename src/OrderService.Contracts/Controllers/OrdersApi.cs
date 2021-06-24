@@ -63,11 +63,13 @@ namespace OrderService.Contracts.Controllers
         /// Update an order by id
         /// </summary>
         /// <param name="orderId">Id of the order to update</param>
+        /// <param name="order"></param>
         /// <response code="200">Updated order</response>
         [HttpPut]
         [Route("/api/orders/{orderId}")]
+        [Consumes("application/json")]
         [ValidateModelState]
         [ProducesResponseType(statusCode: 200, type: typeof(Order))]
-        public abstract Task<IActionResult> UpdateOrderById([FromRoute (Name = "orderId")][Required]Guid orderId);
+        public abstract Task<IActionResult> UpdateOrderById([FromRoute (Name = "orderId")][Required]Guid orderId, [FromBody]Order order);
     }
 }

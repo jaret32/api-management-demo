@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>OrderService.Contracts</AssemblyName>
     <PackageId>OrderService.Contracts</PackageId>
-    <UserSecretsId>180918a1-cd71-456c-889b-f5ba8ddc56e4</UserSecretsId>
+    <UserSecretsId>d99e6c39-2d7a-4113-bbb4-1bee90c50631</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>

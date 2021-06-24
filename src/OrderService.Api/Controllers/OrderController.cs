@@ -22,7 +22,7 @@ namespace OrderService.Api.Controllers
         /// <inheritdoc/>
         public override async Task<IActionResult> GetOrders()
         {
-            return new OkObjectResult(new List<Order>{});
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
@@ -32,7 +32,7 @@ namespace OrderService.Api.Controllers
         }
 
         /// <inheritdoc/>
-        public override Task<IActionResult> UpdateOrderById([FromRoute(Name = "orderId"), Required] Guid orderId)
+        public override Task<IActionResult> UpdateOrderById([FromRoute (Name = "orderId")][Required] Guid orderId, [FromBody] Order order)
         {
             throw new NotImplementedException();
         }
