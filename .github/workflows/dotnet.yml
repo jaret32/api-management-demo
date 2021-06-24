@@ -12,24 +12,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        path: source
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.base.sha }}
+        path: base
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 
+      working-directory: ./source
     - name: Build
       run: dotnet build --no-restore
+      working-directory: ./source
     - name: Test
       run: dotnet test --no-build --verbosity normal
-  
-  diff:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v2
-      - name: Diff OpenAPI Specifications
-        uses: docker://openapitools/openapi-diff:latest
-        with:
-          args: /github/workspace/.openapi/apis/order-api.yaml /github/workspace/.openapi/apis/order-api.yaml
-          
+      working-directory: ./source
+    - name: Diff OpenAPI specifications
+      uses: docker://openapitools/openapi-diff:latest
+      with:
+        args: /github/workspace/base/.openapi/apis/order-api.yaml /github/workspace/source/.openapi/apis/order-api.yaml
+        
