@@ -1,0 +1,32 @@
+name: .NET
+
+on:
+  pull_request:
+    branches: [ feature/* ]
+    types: [ opened, edited ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+  
+  diff:
+    runs-on: ubuntu-latest
+    container: openapitools/openapi-diff
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Diff OpenAPI Specifications
+        run: openapi-diff /github/workspace/.openapi/apis/order-api.yaml /github/workspace/.openapi/apis/order-api.yaml --fail-on-incompatible --state
