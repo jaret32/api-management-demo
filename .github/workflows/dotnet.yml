@@ -2,7 +2,7 @@ name: .NET
 
 on:
   pull_request:
-    branches: [ feature/* ]
+    branches: [ develop ]
     types: [ opened, edited ]
 
 jobs:
@@ -11,22 +11,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        path: source
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.base.sha }}
+        path: base
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 
+      working-directory: ./source
     - name: Build
       run: dotnet build --no-restore
+      working-directory: ./source
     - name: Test
       run: dotnet test --no-build --verbosity normal
-  
-  diff:
-    runs-on: ubuntu-latest
-    container: openapitools/openapi-diff
-    
-    steps:
-      - uses: actions/checkout@v2
-      - name: Diff OpenAPI Specifications
-        run: openapi-diff /github/workspace/.openapi/apis/order-api.yaml /github/workspace/.openapi/apis/order-api.yaml --fail-on-incompatible --state
+      working-directory: ./source
+    - name: Diff OpenAPI specifications
+      uses: docker://openapitools/openapi-diff:latest
+      with:
+        args: /github/workspace/base/.openapi/apis/order-api.yaml /github/workspace/source/.openapi/apis/order-api.yaml
+        
