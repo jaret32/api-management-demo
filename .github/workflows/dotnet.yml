@@ -3,7 +3,7 @@ name: .NET
 on:
   pull_request:
     branches: [ develop ]
-    types: [ opened, edited ]
+    types: [ opened, synchronize ]
 
 jobs:
   build:
@@ -34,5 +34,5 @@ jobs:
     - name: Diff OpenAPI specifications
       uses: docker://openapitools/openapi-diff:latest
       with:
-        args: /github/workspace/base/.openapi/apis/order-api.yaml /github/workspace/source/.openapi/apis/order-api.yaml
+        args: /github/workspace/base/.openapi/apis/order-api.yaml /github/workspace/source/.openapi/apis/order-api.yaml --fail-on-incompatible
         
