@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: Order API
-  version: 1.0.0
+  version: 2021-06-23
 servers:
   - url: /api
 tags:
