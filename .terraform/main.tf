@@ -5,7 +5,7 @@ terraform {
       name = "jaret-demo"
     }
   }
-  
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
