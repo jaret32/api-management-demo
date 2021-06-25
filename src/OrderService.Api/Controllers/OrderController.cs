@@ -20,7 +20,7 @@ namespace OrderService.Api.Controllers
         }
 
         /// <inheritdoc/>
-        public override async Task<IActionResult> GetOrders()
+        public override Task<IActionResult> GetOrders()
         {
             throw new NotImplementedException();
         }
