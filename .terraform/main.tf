@@ -83,10 +83,10 @@ resource "azurerm_api_management" "main" {
 }
 
 resource "azurerm_api_management_api_version_set" "main" {
-  name                = "api-version-2021-06-23"
+  name                = "api-management-demo-apim-versions"
   resource_group_name = azurerm_resource_group.main.name
   api_management_name = azurerm_api_management.main.name
-  display_name        = "API Version 2021-06-23"
+  display_name        = "API Versions"
   versioning_scheme   = "Query"
   version_query_name  = "api-version"
 }
